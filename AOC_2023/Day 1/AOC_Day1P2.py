@@ -4,7 +4,7 @@
 
 AOC_DATA = []
 
-with open('AOC_2023\AOC_DATA.txt') as f:
+with open('AOC_2023\Day 1\AOC_DATA.txt') as f:
         lines = f.readlines()
         for line in lines:
             AOC_DATA.append(line.strip())
