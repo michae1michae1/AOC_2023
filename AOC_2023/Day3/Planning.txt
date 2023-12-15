@@ -1,0 +1,44 @@
+// Part 1
+
+
+data = [
+    '467..114..',
+    '...*......',
+    '..35..633.',
+    '......#...',
+    '617*......',
+    '.....+.58.',
+    '..592.....',
+    '......755.',
+    '...$.*....',
+    '.664.598..'
+]
+
+// Iterate through array checking for...
+
+// This is our main function to get part numbers next to symbols
+def part_numbers():
+    for each line in data and for char in line of this array
+        if character isdigit
+            num_position = current index in array
+            check if num_position matches sorrounding_matches
+                return nearest_neighbors in list as int
+        else:
+            continue iterating through array
+
+// use nearest nearest neighbor function to find 
+def nearest_neighbors():
+    find them using whatever logic
+    return this new string
+
+// This should give a list of all the indexes that are sorrounding all symbols in the data
+def sorrounding_matches()
+    set directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+    match_ids = identiify sorrounding indexes that are in bounds of the data
+    return all match_ids in a list
+
+// add all part numbers up                
+Total Part Numbers = part_numbers +=
+
+
+        
