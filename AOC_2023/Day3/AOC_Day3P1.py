@@ -1,9 +1,10 @@
 
 #AOC DAY 3
-#PART 2 OF 2
+#PART 1 OF 2
 
-# Find 2 numbers adjacent to a star symbol
-# If exactly 2 match, multiply them together to get gear ratio, then sum those values
+# any number adjacent to a symbol, even diagonally, is a "part number" 
+# and should be included in your sum. (Periods (.) do not count as a symbol.)
+
          
 # Import as list of strings for each line
 def read_input(use_example_data: bool = False) -> list[str]:
@@ -25,7 +26,7 @@ def read_input(use_example_data: bool = False) -> list[str]:
             lines = f.read().splitlines()
         return lines
 
-# Create class representing position in grid with coordinates
+# representing position in grid with coordinates
 class Position:
     
     # Setup methods to do operations with these position coords
@@ -45,7 +46,7 @@ class Position:
     def __repr__(self):
         return f"Position({self.x}, {self.y})"
 
-# Represent grid as dictionary - Key is Position
+# grid as dictionary - Key is Position
 Grid = dict[Position, str]
 
 # Convert / Parse our input data into a grid
@@ -59,21 +60,21 @@ def lines_to_grid(lines: list[str]) -> Grid:
 
     return grid
 
-# Directions for finding the symbol neighbors
+
 n_directions: list[Position] = [
     Position(dx, dy)
-    # change in x and y in all of these combinations
+    
     for dx in [-1, 0, 1]
     for dy in [-1, 0, 1]
+    
     # handle the fact that 0 and 0 change in direction would be the current position, we don't want that
     if not (dx == 0 and dy == 0)
 ]
 
-# Set perameters for getting our neighbors
 def get_neighbours(position: Position, grid: Grid) -> set[Position]:
     return {
         
-        #So now we can navigate the grid using our classes
+        # now we can navigate the grid using our classes
         position + direction
         for direction in n_directions
         
@@ -117,8 +118,8 @@ def find_numbers_in_lines(lines: list[str]) -> list[NumberWithPosition]:
 
     return numbers
 
-# How we pull the numbers out of the line
 def find_numbers_in_line(line: str, line_number: int):
+    
     # "467..114.."
     numbers: list[NumberWithPosition] = []
     
@@ -131,12 +132,11 @@ def find_numbers_in_line(line: str, line_number: int):
             x += 1
             continue
 
-        # if it is digit, then we want to get the value of this and also the positions
+        # we want to get the value of this and also the positions
         length = find_length_of_number(line, starting_position=x)
         value = int(line[x:x + length])
         positions = {Position(x + i, line_number) for i in range(length)}
         
-        # So now we have a number that stores both the value and the positions
         # Important because we need to know all of the positions for the entire new number so we do not have duplicates
         new_number = NumberWithPosition(value, positions)
         numbers.append(new_number)
@@ -145,7 +145,6 @@ def find_numbers_in_line(line: str, line_number: int):
   
     return numbers
 
-# Use to detemine number of digits in a number
 def find_length_of_number(line, starting_position):
     length = 1
     while starting_position + length < len(line):
@@ -157,7 +156,6 @@ def find_length_of_number(line, starting_position):
 
     return length
 
-# Solver using final functions
 def solve(lines: list[str]) -> int:
     numbers = find_numbers_in_lines(lines)
     grid = lines_to_grid(lines)
@@ -172,26 +170,23 @@ def solve(lines: list[str]) -> int:
         
     return Part_numbers
 
-# checking if a number is adjacent to symbol
 def has_adjacent_symbol(grid: Grid, number: NumberWithPosition) -> bool:
     
-    # first we go grab all the neighbors of the set
     neighbours = get_neighbours_of_set(number.positions, grid)
-    # then we check in the grid if the neighbar position in the neighbors set is a symbol
+    
+    # check in the grid if the neighbar position in the neighbors set is a symbol
     for neighbour in neighbours:
         if is_symbol(grid[neighbour]):
             return True
 
     return False
 
-# ID a symbol
 def is_symbol(character: str) -> bool:
     if character.isdigit() or character == ".":
         return False
 
     return True
 
-# Final
 def WIN():
     lines = read_input()
     solution = solve(lines)

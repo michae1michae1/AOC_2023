@@ -1,9 +1,9 @@
 
 #AOC DAY 3
-#PART 1 OF 2
+#PART 2 OF 2
 
-# any number adjacent to a symbol, even diagonally, is a "part number" 
-# and should be included in your sum. (Periods (.) do not count as a symbol.)
+# # Find 2 numbers adjacent to a star symbol
+# If exactly 2 match, multiply them together to get gear ratio, then sum those values
          
 # Import as list of strings for each line
 def read_input(use_example_data: bool = False) -> list[str]:
@@ -25,7 +25,7 @@ def read_input(use_example_data: bool = False) -> list[str]:
             lines = f.read().splitlines()
         return lines
 
-# Create class representing position in grid with coordinates
+# representing position in grid with coordinates
 class Position:
     
     # Setup methods to do operations with these position coords
